@@ -9,7 +9,7 @@ public class CountAndFunction {
 
         for (String word : words) {
             // remove all non-alphabetic characters
-            word = word.replaceAll("[^\\w]", "");
+            word = word.replaceAll("[^a-zA-Z]+", "");
 
             // put all words to lower case and check for ands
             if (word.equalsIgnoreCase("and")){
