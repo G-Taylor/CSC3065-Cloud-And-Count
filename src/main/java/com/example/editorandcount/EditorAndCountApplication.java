@@ -18,14 +18,8 @@ public class EditorAndCountApplication {
         SpringApplication.run(EditorAndCountApplication.class, args);
     }
 
-    @ModelAttribute
-    public void setResponseHeader(HttpServletResponse response) {
-        response.setHeader("Content-Type", "application/json");
-        response.setHeader("Access-Control-Allow-Origin", "*");
-    }
-
     @GetMapping("/")
-    public String getResponse(@RequestParam(value = "text") String text) throws JSONException {
+    public String getResponse(@RequestParam(value = "text") String text, HttpServletResponse response) throws JSONException {
 
         CountAndFunction countAndFunction = new CountAndFunction();
         JSONObject object = new JSONObject();
@@ -42,7 +36,8 @@ public class EditorAndCountApplication {
             object.put("answer", numberOfAnds);
         }
 
-
+        response.setHeader("Content-Type", "application/json");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return object.toString();
     }
 }
