@@ -16,7 +16,7 @@ public class EditorAndCountApplication {
         SpringApplication.run(EditorAndCountApplication.class, args);
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://frontend.40234272.qpc.hal.davecutting.uk")
     @GetMapping("/")
     public String getResponse(@RequestParam(value = "text") String text) throws JSONException {
 
