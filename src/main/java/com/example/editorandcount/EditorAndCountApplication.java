@@ -4,10 +4,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.editorandcount.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @SpringBootApplication
 @RestController
@@ -16,6 +16,12 @@ public class EditorAndCountApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(EditorAndCountApplication.class, args);
+    }
+
+    @ModelAttribute
+    public void setResponseHeader(HttpServletResponse response) {
+        response.setHeader("Content-Type", "application/json");
+        response.setHeader("Access-Control-Allow-Origin", "*");
     }
 
     @GetMapping("/")
