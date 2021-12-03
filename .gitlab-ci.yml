@@ -1,0 +1,9 @@
+image: openjdk:15-jdk-alpine
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - ./mvnw test

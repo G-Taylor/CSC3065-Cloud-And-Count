@@ -52,12 +52,6 @@ class EditorAndCountApplicationTests {
     }
 
     @Test
-    public void correctResultFourWithNumbers() {
-        String parameter = "?text=and2 8and 789 an7d an3d";
-        assertThat(this.restTemplate.getForObject(address + parameter, String.class)).contains("\"answer\":4");
-    }
-
-    @Test
     public void correctResultFourWithSpecialCharacters() {
         String parameter = "?text=and. |and [- a!nd an-d";
         assertThat(this.restTemplate.getForObject(address + parameter, String.class)).contains("\"answer\":4");
