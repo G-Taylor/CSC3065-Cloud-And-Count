@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.editorandcount.*;
 
@@ -16,9 +17,8 @@ public class EditorAndCountApplication {
         SpringApplication.run(EditorAndCountApplication.class, args);
     }
 
-    @CrossOrigin(origins = "http://frontend.40234272.qpc.hal.davecutting.uk")
     @GetMapping("/")
-    public String getResponse(@RequestParam(value = "text") String text) throws JSONException {
+    public ResponseEntity<String> getResponse(@RequestParam(value = "text") String text) throws JSONException {
 
         CountAndFunction countAndFunction = new CountAndFunction();
         JSONObject object = new JSONObject();
@@ -26,16 +26,24 @@ public class EditorAndCountApplication {
         int numberOfAnds = countAndFunction.countAnds(text);
 
         if (text.equals("")) {
-            object.put("error", false);
+            object.put("error", true);
             object.put("sentence", "No Text Entered");
             object.put("answer", 0);
+
+            return ResponseEntity.badRequest()
+                    .header("Content-Type", "application/json")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .body(object.toString());
         } else {
             object.put("error", false);
             object.put("sentence", text);
             object.put("answer", numberOfAnds);
+
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .body(object.toString());
         }
 
-
-        return object.toString();
     }
 }
