@@ -7,3 +7,4 @@ test:
   stage: test
   script:
     - ./mvnw test
+    
